@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AWS Auto Scaling Chaos Lab | Aar Web & Cloud</title>
+
+    <meta name="description"
+          content="AWS Auto Scaling Chaos Lab using EC2, ALB, Auto Scaling, Lifecycle Hooks, EventBridge and Lambda.">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #0b1120;
+            color: #ffffff;
+            line-height: 1.7;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        /* NAV */
+
+        nav {
+            padding: 22px 0;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #38bdf8;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #cbd5e1;
+        }
+
+        .nav-links a:hover {
+            color: #38bdf8;
+        }
+
+        /* HERO */
+
+        .hero {
+            text-align: center;
+            padding: 100px 20px 70px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 7px 14px;
+            border: 1px solid #334155;
+            border-radius: 20px;
+            color: #38bdf8;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: #38bdf8;
+        }
+
+        .hero p {
+            max-width: 750px;
+            margin: auto;
+            color: #94a3b8;
+            font-size: 18px;
+        }
+
+        /* BUTTONS */
+
+        .buttons {
+            margin-top: 30px;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 24px;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .primary {
+            background: #38bdf8;
+            color: #07111f;
+        }
+
+        .secondary {
+            border: 1px solid #334155;
+            color: #cbd5e1;
+        }
+
+        /* SECTIONS */
+
+        section {
+            padding: 70px 0;
+        }
+
+        .section-title {
+            margin-bottom: 30px;
+        }
+
+        .section-title h2 {
+            font-size: 35px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #94a3b8;
+        }
+
+        .card {
+            background: #111827;
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            padding: 30px;
+        }
+
+        /* OVERVIEW */
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .card p {
+            color: #94a3b8;
+        }
+
+        /* ARCHITECTURE */
+
+        .architecture {
+            background: #111827;
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            padding: 30px;
+            overflow-x: auto;
+        }
+
+        .architecture pre {
+            font-family: Consolas, monospace;
+            color: #cbd5e1;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* SERVICES */
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .service {
+            background: #111827;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 22px;
+        }
+
+        .service h3 {
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .service p {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        /* IMPLEMENTATION */
+
+        .implementation {
+            display: grid;
+            gap: 15px;
+        }
+
+        .step {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            background: #111827;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 22px;
+        }
+
+        .step-number {
+            min-width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 50%;
+            color: #38bdf8;
+            font-weight: bold;
+        }
+
+        .step h3 {
+            margin-bottom: 5px;
+        }
+
+        .step p {
+            color: #94a3b8;
+        }
+
+        /* RESULTS */
+
+        .results {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .result {
+            text-align: center;
+            background: #111827;
+            border: 1px solid #1e293b;
+            border-radius: 14px;
+            padding: 30px 20px;
+        }
+
+        .result h3 {
+            color: #38bdf8;
+            margin-bottom: 8px;
+        }
+
+        .result p {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        /* SCREENSHOTS */
+
+        .screenshots {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .screenshot {
+            min-height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: #111827;
+            border: 1px dashed #334155;
+            border-radius: 12px;
+            color: #64748b;
+            padding: 20px;
+        }
+
+        /* CTA */
+
+        .cta {
+            text-align: center;
+            background: #111827;
+            border: 1px solid #1e293b;
+            border-radius: 20px;
+            padding: 60px 20px;
+        }
+
+        .cta h2 {
+            font-size: 36px;
+            margin-bottom: 12px;
+        }
+
+        .cta p {
+            color: #94a3b8;
+            margin-bottom: 25px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            border-top: 1px solid #1e293b;
+            padding: 30px 0;
+            text-align: center;
+            color: #64748b;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 850px) {
+
+            .nav-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .overview-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .services {
+                grid-template-columns: 1fr;
+            }
+
+            .results {
+                grid-template-columns: 1fr;
+            }
+
+            .screenshots {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVIGATION -->
+
+    <nav>
+
+        <div class="container nav-container">
+
+            <div class="logo">
+                Aar<span>.</span>
+            </div>
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="index.html">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="services.html">
+                        Services
+                    </a>
+                </li>
+
+                <li>
+                    <a href="projects.html">
+                        Projects
+                    </a>
+                </li>
+
+                <li>
+                    <a href="about.html">
+                        About
+                    </a>
+                </li>
+
+                <li>
+                    <a href="contact.html">
+                        Contact
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+
+    <!-- HERO -->
+
+    <header class="hero">
+
+        <div class="container">
+
+            <div class="badge">
+                AWS / DevOps Project
+            </div>
+
+            <h1>
+                Auto Scaling
+                <span>Chaos Lab</span>
+            </h1>
+
+            <p>
+                A hands-on AWS infrastructure project demonstrating
+                automatic scaling, load balancing, lifecycle automation
+                and event-driven server management.
+            </p>
+
+            <div class="buttons">
+
+                <!-- REPLACE WITH YOUR PROJECT GITHUB URL -->
+
+                <a href="https://github.com/aarchi09/ASG-Chaos-Lab"
+                   target="_blank"
+                   class="btn primary">
+                    View GitHub Project
+                </a>
+
+                <a href="projects.html"
+                   class="btn secondary">
+                    ← Back to Projects
+                </a>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- OVERVIEW -->
+
+    <section>
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>
+                    Project Overview
+                </h2>
+
+                <p>
+                    What this project demonstrates.
+                </p>
+
+            </div>
+
+
+            <div class="overview-grid">
+
+                <div class="card">
+
+                    <h3>
+                        The Challenge
+                    </h3>
+
+                    <p>
+                        Modern applications need to remain available
+                        when traffic changes or individual compute
+                        instances fail. Manually managing servers
+                        becomes inefficient and unreliable.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>
+                        The Solution
+                    </h3>
+
+                    <p>
+                        I built an AWS Auto Scaling environment with
+                        an Application Load Balancer, lifecycle hooks,
+                        EventBridge and Lambda automation to manage
+                        instance lifecycle events.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ARCHITECTURE -->
+
+    <section>
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>
+                    Architecture
+                </h2>
+
+                <p>
+                    High-level architecture of the solution.
+                </p>
+
+            </div>
+
+
+            <div class="architecture">
+
+<pre>
+                         INTERNET
+                             │
+                             ▼
+                ┌─────────────────────┐
+                │ Application Load    │
+                │ Balancer            │
+                └──────────┬──────────┘
+                           │
+                           ▼
+                    ┌─────────────┐
+                    │ Target Group│
+                    └──────┬──────┘
+                           │
+                 ┌─────────┴─────────┐
+                 ▼                   ▼
+          ┌─────────────┐     ┌─────────────┐
+          │ EC2         │     │ EC2         │
+          │ Instance #1 │     │ Instance #2 │
+          └──────┬──────┘     └──────┬──────┘
+                 │                   │
+                 └─────────┬─────────┘
+                           ▼
+                  ┌─────────────────┐
+                  │ Auto Scaling    │
+                  │ Group           │
+                  └────────┬────────┘
+                           │
+                           ▼
+                  ┌─────────────────┐
+                  │ Lifecycle Hook  │
+                  └────────┬────────┘
+                           │
+                           ▼
+                  ┌─────────────────┐
+                  │ EventBridge     │
+                  └────────┬────────┘
+                           │
+                           ▼
+                  ┌─────────────────┐
+                  │ AWS Lambda      │
+                  └─────────────────┘
+</pre>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- AWS SERVICES -->
+
+    <section>
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>
+                    AWS Services Used
+                </h2>
+
+                <p>
+                    Core AWS services used in the implementation.
+                </p>
+
+            </div>
+
+
+            <div class="services">
+
+
+                <div class="service">
+
+                    <h3>
+                        Amazon EC2
+                    </h3>
+
+                    <p>
+                        Provides the compute instances running
+                        the web application.
+                    </p>
+
+                </div>
+
+
+                <div class="service">
+
+                    <h3>
+                        Auto Scaling
+                    </h3>
+
+                    <p>
+                        Maintains the desired number of healthy
+                        instances and handles scaling.
+                    </p>
+
+                </div>
+
+
+                <div class="service">
+
+                    <h3>
+                        Application Load Balancer
+                    </h3>
+
+                    <p>
+                        Distributes incoming application traffic
+                        across healthy EC2 instances.
+                    </p>
+
+                </div>
+
+
+                <div class="service">
+
+                    <h3>
+                        Target Group
+                    </h3>
+
+                    <p>
+                        Performs health checks and manages the
+                        instances receiving application traffic.
+                    </p>
+
+                </div>
+
+
+                <div class="service">
+
+                    <h3>
+                        EventBridge
+                    </h3>
+
+                    <p>
+                        Detects lifecycle events and triggers
+                        the automation workflow.
+                    </p>
+
+                </div>
+
+
+                <div class="service">
+
+                    <h3>
+                        AWS Lambda
+                    </h3>
+
+                    <p>
+                        Processes the lifecycle event and performs
+                        the required automation.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- IMPLEMENTATION -->
+
+    <section>
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>
+                    Implementation
+                </h2>
+
+                <p>
+                    Main steps completed during the project.
+                </p>
+
+            </div>
+
+
+            <div class="implementation">
+
+
+                <div class="step">
+
+                    <div class="step-number">
+                        01
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Created the EC2 Launch Template
+                        </h3>
+
+                        <p>
+                            Configured the web application environment
+                            and instance settings used by Auto Scaling.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-number">
+                        02
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Configured the Load Balancer
+                        </h3>
+
+                        <p>
+                            Created an Application Load Balancer and
+                            target group with health checks.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-number">
+                        03
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Configured Auto Scaling
+                        </h3>
+
+                        <p>
+                            Created the Auto Scaling Group with desired,
+                            minimum and maximum capacity settings.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-number">
+                        04
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Added Lifecycle Hook
+                        </h3>
+
+                        <p>
+                            Added a lifecycle hook to pause newly launched
+                            instances before they entered service.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-number">
+                        05
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Added EventBridge Automation
+                        </h3>
+
+                        <p>
+                            Configured an EventBridge rule to detect
+                            EC2 instance launch lifecycle events.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-number">
+                        06
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Added Lambda Handler
+                        </h3>
+
+                        <p>
+                            Lambda processed the lifecycle event and
+                            completed the lifecycle action automatically.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- RESULTS -->
+
+    <section>
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>
+                    What I Demonstrated
+                </h2>
+
+                <p>
+                    Practical cloud and DevOps capabilities demonstrated
+                    through the project.
+                </p>
+
+            </div>
+
+
+            <div class="results">
+
+
+                <div class="result">
+
+                    <h3>
+                        High Availability
+                    </h3>
+
+                    <p>
+                        Traffic is distributed across healthy
+                        application instances.
+                    </p>
+
+                </div>
+
+
+                <div class="result">
+
+                    <h3>
+                        Automation
+                    </h3>
+
+                    <p>
+                        Lifecycle events trigger automated
+                        server-management workflows.
+                    </p>
+
+                </div>
+
+
+                <div class="result">
+
+                    <h3>
+                        Fault Handling
+                    </h3>
+
+                    <p>
+                        The environment can replace unhealthy
+                        or terminated instances automatically.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SCREENSHOTS -->
+
+    <section>
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>
+                    Project Evidence
+                </h2>
+
+                <p>
+                    AWS Console screenshots will be added here.
+                </p>
+
+            </div>
+
+
+            <div class="screenshots">
+
+                <div class="screenshot">
+
+                    AWS Auto Scaling Group screenshot
+
+                </div>
+
+                <div class="screenshot">
+
+                    Application Load Balancer screenshot
+
+                </div>
+
+                <div class="screenshot">
+
+                    Lifecycle Hook screenshot
+
+                </div>
+
+                <div class="screenshot">
+
+                    EventBridge / Lambda screenshot
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CTA -->
+
+    <section>
+
+        <div class="container">
+
+            <div class="cta">
+
+                <h2>
+                    Interested in AWS Cloud Solutions?
+                </h2>
+
+                <p>
+                    I build practical cloud infrastructure and
+                    automation solutions for real-world use cases.
+                </p>
+
+                <a href="contact.html"
+                   class="btn primary">
+                    Start a Conversation
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="container">
+
+            <p>
+                © 2026 Aar Web & Cloud.
+                All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+</body>
+
+</html>
