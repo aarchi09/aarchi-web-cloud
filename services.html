@@ -291,6 +291,105 @@
             }
 
         }
+        /* PRICING */
+
+.pricing {
+    padding: 90px 0;
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.pricing-card {
+    position: relative;
+    background: #111827;
+    border: 1px solid #1e293b;
+    border-radius: 18px;
+    padding: 35px 28px;
+    transition: 0.3s;
+}
+
+.pricing-card:hover {
+    transform: translateY(-5px);
+    border-color: #38bdf8;
+}
+
+.pricing-card.featured {
+    border-color: #38bdf8;
+}
+
+.popular {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    background: #38bdf8;
+    color: #07111f;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.pricing-icon {
+    font-size: 35px;
+    margin-bottom: 15px;
+}
+
+.pricing-card h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.price {
+    font-size: 32px;
+    font-weight: bold;
+    color: #38bdf8;
+    margin-bottom: 10px;
+}
+
+.price-description {
+    color: #94a3b8;
+    min-height: 65px;
+}
+
+.pricing-card ul {
+    list-style: none;
+    margin: 25px 0;
+    padding: 0;
+}
+
+.pricing-card li {
+    padding: 8px 0;
+    color: #cbd5e1;
+}
+
+.pricing-btn {
+    display: block;
+    text-align: center;
+    padding: 13px;
+    background: #38bdf8;
+    color: #07111f;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.pricing-btn:hover {
+    opacity: 0.9;
+}
+
+
+/* MOBILE PRICING */
+
+@media (max-width: 850px) {
+
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
 
     </style>
 
@@ -370,6 +469,209 @@
         </div>
 
     </section>
+    <!-- PRICING -->
+
+<section class="pricing">
+
+    <div class="container">
+
+        <div class="section-title">
+
+            <h2>
+                Simple Packages
+            </h2>
+
+            <p>
+                Start with a package and customize it according
+                to your business requirements.
+            </p>
+
+        </div>
+
+
+        <div class="pricing-grid">
+
+
+            <!-- WEBSITE -->
+
+            <div class="pricing-card">
+
+                <div class="pricing-icon">
+                    🌐
+                </div>
+
+                <h3>
+                    Website Starter
+                </h3>
+
+                <p class="price">
+                    ₹1,999+
+                </p>
+
+                <p class="price-description">
+                    For small businesses, portfolios and
+                    personal brands.
+                </p>
+
+
+                <ul>
+
+                    <li>
+                        ✓ 1–3 responsive pages
+                    </li>
+
+                    <li>
+                        ✓ Mobile-friendly design
+                    </li>
+
+                    <li>
+                        ✓ Contact section
+                    </li>
+
+                    <li>
+                        ✓ GitHub Pages deployment
+                    </li>
+
+                    <li>
+                        ✓ Basic SEO setup
+                    </li>
+
+                </ul>
+
+
+                <a href="contact.html"
+                   class="pricing-btn">
+
+                    Get Started
+
+                </a>
+
+            </div>
+
+
+            <!-- AWS -->
+
+            <div class="pricing-card featured">
+
+                <div class="popular">
+                    POPULAR
+                </div>
+
+                <div class="pricing-icon">
+                    ☁️
+                </div>
+
+                <h3>
+                    AWS Cloud Setup
+                </h3>
+
+                <p class="price">
+                    ₹2,999+
+                </p>
+
+                <p class="price-description">
+                    For businesses that want to deploy
+                    applications on AWS.
+                </p>
+
+
+                <ul>
+
+                    <li>
+                        ✓ AWS deployment
+                    </li>
+
+                    <li>
+                        ✓ EC2 / S3 configuration
+                    </li>
+
+                    <li>
+                        ✓ Basic networking
+                    </li>
+
+                    <li>
+                        ✓ HTTPS configuration
+                    </li>
+
+                    <li>
+                        ✓ Basic monitoring
+                    </li>
+
+                </ul>
+
+
+                <a href="contact.html"
+                   class="pricing-btn">
+
+                    Get Started
+
+                </a>
+
+            </div>
+
+
+            <!-- AI -->
+
+            <div class="pricing-card">
+
+                <div class="pricing-icon">
+                    🤖
+                </div>
+
+                <h3>
+                    AI Automation
+                </h3>
+
+                <p class="price">
+                    ₹4,999+
+                </p>
+
+                <p class="price-description">
+                    Automate repetitive business tasks using
+                    AI-powered workflows.
+                </p>
+
+
+                <ul>
+
+                    <li>
+                        ✓ Workflow automation
+                    </li>
+
+                    <li>
+                        ✓ AI integration
+                    </li>
+
+                    <li>
+                        ✓ Automated notifications
+                    </li>
+
+                    <li>
+                        ✓ Data processing
+                    </li>
+
+                    <li>
+                        ✓ Basic documentation
+                    </li>
+
+                </ul>
+
+
+                <a href="contact.html"
+                   class="pricing-btn">
+
+                    Discuss Your Idea
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
 
 
     <!-- SERVICES -->
