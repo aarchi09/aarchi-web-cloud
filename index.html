@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Aarchi Web & Cloud | Websites, AWS & AI Automation</title>
+
+    <meta name="description"
+          content="Professional websites, AWS cloud deployment and AI automation solutions for businesses and startups.">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #0b1120;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1150px;
+            margin: auto;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            padding: 22px 0;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #38bdf8;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #cbd5e1;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #38bdf8;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border: 1px solid #334155;
+            border-radius: 30px;
+            color: #38bdf8;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            line-height: 1.1;
+            margin-bottom: 25px;
+        }
+
+        .hero h1 span {
+            color: #38bdf8;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #94a3b8;
+            max-width: 700px;
+            margin-bottom: 35px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        .btn-primary {
+            background: #38bdf8;
+            color: #07111f;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            border: 1px solid #475569;
+            color: #ffffff;
+        }
+
+        .btn-secondary:hover {
+            border-color: #38bdf8;
+            color: #38bdf8;
+        }
+
+        /* SERVICES */
+
+        section {
+            padding: 90px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #94a3b8;
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .card {
+            background: #111827;
+            border: 1px solid #1e293b;
+            border-radius: 15px;
+            padding: 30px;
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #38bdf8;
+        }
+
+        .card-icon {
+            font-size: 35px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            font-size: 23px;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: #94a3b8;
+        }
+
+        /* PROJECTS */
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .project {
+            background: #111827;
+            border: 1px solid #1e293b;
+            border-radius: 15px;
+            padding: 25px;
+        }
+
+        .project h3 {
+            margin-bottom: 12px;
+        }
+
+        .project p {
+            color: #94a3b8;
+            margin-bottom: 20px;
+        }
+
+        .project a {
+            color: #38bdf8;
+            font-weight: bold;
+        }
+
+        /* CTA */
+
+        .cta {
+            text-align: center;
+            background: #111827;
+            border: 1px solid #1e293b;
+            border-radius: 20px;
+            padding: 60px 25px;
+        }
+
+        .cta h2 {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            color: #94a3b8;
+            margin-bottom: 30px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            border-top: 1px solid #1e293b;
+            padding: 30px 0;
+            text-align: center;
+            color: #64748b;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 800px) {
+
+            .nav-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .nav-links {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 45px;
+            }
+
+            .services,
+            .projects {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVIGATION -->
+
+    <nav>
+        <div class="container nav-container">
+
+            <div class="logo">
+                Aarchi<span>.</span>
+            </div>
+
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+
+        </div>
+    </nav>
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="container">
+
+            <div class="hero-content">
+
+                <div class="badge">
+                    Web Development • AWS Cloud • AI Automation
+                </div>
+
+                <h1>
+                    Build.
+                    <span>Deploy.</span>
+                    Automate.
+                </h1>
+
+                <p>
+                    I build modern websites, deploy reliable cloud
+                    infrastructure on AWS, and create practical AI
+                    automation solutions for businesses and startups.
+                </p>
+
+                <div class="buttons">
+
+                    <a href="projects.html"
+                       class="btn btn-primary">
+                        View Projects
+                    </a>
+
+                    <a href="contact.html"
+                       class="btn btn-secondary">
+                        Work With Me
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SERVICES -->
+
+    <section>
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>What I Do</h2>
+
+                <p>
+                    Technology solutions designed for modern businesses.
+                </p>
+
+            </div>
+
+
+            <div class="services">
+
+                <div class="card">
+
+                    <div class="card-icon">🌐</div>
+
+                    <h3>Web Development</h3>
+
+                    <p>
+                        Modern, responsive and professional websites
+                        for businesses, startups and professionals.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-icon">☁️</div>
+
+                    <h3>AWS Cloud</h3>
+
+                    <p>
+                        Website deployment, HTTPS, CloudFront,
+                        monitoring and practical AWS cloud solutions.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="card-icon">🤖</div>
+
+                    <h3>AI Automation</h3>
+
+                    <p>
+                        Practical AI-powered workflows that help
+                        businesses reduce repetitive tasks and
+                        handle customer enquiries.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- PROJECTS -->
+
+    <section>
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>Featured Projects</h2>
+
+                <p>
+                    Hands-on cloud and development projects.
+                </p>
+
+            </div>
+
+
+            <div class="projects">
+
+                <div class="project">
+
+                    <h3>Secure AWS Website</h3>
+
+                    <p>
+                        Route 53, ACM, CloudFront, WAF and
+                        secure HTTPS deployment.
+                    </p>
+
+                    <a href="projects.html">
+                        View Project →
+                    </a>
+
+                </div>
+
+
+                <div class="project">
+
+                    <h3>Secure RDS Deployment</h3>
+
+                    <p>
+                        Private Multi-AZ MySQL deployment with
+                        IAM authentication and Secrets Manager.
+                    </p>
+
+                    <a href="projects.html">
+                        View Project →
+                    </a>
+
+                </div>
+
+
+                <div class="project">
+
+                    <h3>AWS Auto Scaling Lab</h3>
+
+                    <p>
+                        Auto Scaling, mixed instances, lifecycle
+                        hooks, EventBridge and Lambda.
+                    </p>
+
+                    <a href="projects.html">
+                        View Project →
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CTA -->
+
+    <section>
+
+        <div class="container">
+
+            <div class="cta">
+
+                <h2>Have a project in mind?</h2>
+
+                <p>
+                    Let's build something useful for your business.
+                </p>
+
+                <a href="contact.html"
+                   class="btn btn-primary">
+                    Let's Work Together
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="container">
+
+            <p>
+                © 2026 Aarchi Web & Cloud. All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+</body>
+</html>
