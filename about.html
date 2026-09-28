@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>About | Aarchi Web & Cloud</title>
+
+    <meta name="description"
+          content="About Aarchi - B.Tech CSE student specializing in AWS Cloud, DevOps, web development and AI automation.">
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #0b1120;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1150px;
+            margin: auto;
+        }
+
+        /* NAVIGATION */
+
+        nav {
+            padding: 22px 0;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #38bdf8;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #cbd5e1;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #38bdf8;
+        }
+
+        .nav-links .active {
+            color: #38bdf8;
+        }
+
+        /* PAGE HEADER */
+
+        .page-header {
+            text-align: center;
+            padding: 100px 20px 70px;
+        }
+
+        .page-header h1 {
+            font-size: 55px;
+            margin-bottom: 20px;
+        }
+
+        .page-header h1 span {
+            color: #38bdf8;
+        }
+
+        .page-header p {
+            max-width: 700px;
+            margin: auto;
+            color: #94a3b8;
+            font-size: 18px;
+        }
+
+        /* ABOUT */
+
+        .about-section {
+            padding: 30px 0 80px;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-content h2 {
+            font-size: 35px;
+            margin-bottom: 20px;
+        }
+
+        .about-content p {
+            color: #94a3b8;
+            margin-bottom: 18px;
+            font-size: 17px;
+        }
+
+        .highlight {
+            color: #38bdf8;
+            font-weight: bold;
+        }
+
+        /* PROFILE CARD */
+
+        .profile-card {
+            background: #111827;
+            border: 1px solid #1e293b;
+            border-radius: 18px;
+            padding: 35px;
+        }
+
+        .profile-card h2 {
+            margin-bottom: 20px;
+        }
+
+        .profile-item {
+            padding: 15px 0;
+            border-bottom: 1px solid #1e293b;
+        }
+
+        .profile-item:last-child {
+            border-bottom: none;
+        }
+
+        .profile-item strong {
+            display: block;
+            color: #38bdf8;
+            margin-bottom: 4px;
+        }
+
+        .profile-item span {
+            color: #cbd5e1;
+        }
+
+        /* SKILLS */
+
+        .skills-section {
+            background: #111827;
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #94a3b8;
+        }
+
+        .skills {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .skill {
+            padding: 25px;
+            text-align: center;
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            background: #0f172a;
+        }
+
+        .skill h3 {
+            margin-bottom: 8px;
+        }
+
+        .skill p {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        /* APPROACH */
+
+        .approach-section {
+            padding: 90px 0;
+        }
+
+        .approach {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .approach-card {
+            padding: 30px;
+            border: 1px solid #1e293b;
+            border-radius: 15px;
+            background: #111827;
+        }
+
+        .approach-card h3 {
+            margin-bottom: 12px;
+        }
+
+        .approach-card p {
+            color: #94a3b8;
+        }
+
+        /* CTA */
+
+        .cta-section {
+            padding: 20px 0 90px;
+        }
+
+        .cta {
+            text-align: center;
+            background: #111827;
+            border: 1px solid #1e293b;
+            border-radius: 20px;
+            padding: 60px 25px;
+        }
+
+        .cta h2 {
+            font-size: 40px;
+            margin-bottom: 15px;
+        }
+
+        .cta p {
+            color: #94a3b8;
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 26px;
+            background: #38bdf8;
+            color: #07111f;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        /* FOOTER */
+
+        footer {
+            border-top: 1px solid #1e293b;
+            padding: 30px 0;
+            text-align: center;
+            color: #64748b;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 850px) {
+
+            .nav-container {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .nav-links {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .approach {
+                grid-template-columns: 1fr;
+            }
+
+            .page-header h1 {
+                font-size: 42px;
+            }
+
+        }
+
+        @media (max-width: 500px) {
+
+            .skills {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- NAVIGATION -->
+
+    <nav>
+
+        <div class="container nav-container">
+
+            <div class="logo">
+                Aarchi<span>.</span>
+            </div>
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="index.html">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="services.html">
+                        Services
+                    </a>
+                </li>
+
+                <li>
+                    <a href="projects.html">
+                        Projects
+                    </a>
+                </li>
+
+                <li>
+                    <a href="about.html"
+                       class="active">
+                        About
+                    </a>
+                </li>
+
+                <li>
+                    <a href="contact.html">
+                        Contact
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+    </nav>
+
+
+    <!-- PAGE HEADER -->
+
+    <section class="page-header">
+
+        <div class="container">
+
+            <h1>
+                About <span>Me</span>
+            </h1>
+
+            <p>
+                Building practical solutions at the intersection
+                of web development, cloud computing and AI.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- ABOUT -->
+
+    <section class="about-section">
+
+        <div class="container">
+
+            <div class="about-grid">
+
+
+                <div class="about-content">
+
+                    <h2>
+                        Hi, I'm Aarchi.
+                    </h2>
+
+                    <p>
+                        I'm a
+                        <span class="highlight">
+                            B.Tech Computer Science Engineering
+                        </span>
+                        student interested in building practical
+                        technology solutions for businesses.
+                    </p>
+
+                    <p>
+                        My primary focus is
+                        <span class="highlight">
+                            AWS Cloud and DevOps
+                        </span>,
+                        along with web development and
+                        AI-powered automation.
+                    </p>
+
+                    <p>
+                        I enjoy taking an idea from development
+                        to deployment — building the application,
+                        configuring the cloud infrastructure and
+                        making the solution accessible to real users.
+                    </p>
+
+                    <p>
+                        My goal is to create simple, useful and
+                        reliable technology solutions rather than
+                        building technology just for the sake of it.
+                    </p>
+
+                </div>
+
+
+                <!-- PROFILE -->
+
+                <div class="profile-card">
+
+                    <h2>
+                        My Focus
+                    </h2>
+
+                    <div class="profile-item">
+
+                        <strong>
+                            Education
+                        </strong>
+
+                        <span>
+                            B.Tech Computer Science Engineering
+                        </span>
+
+                    </div>
+
+                    <div class="profile-item">
+
+                        <strong>
+                            Cloud
+                        </strong>
+
+                        <span>
+                            AWS Cloud & DevOps
+                        </span>
+
+                    </div>
+
+                    <div class="profile-item">
+
+                        <strong>
+                            Development
+                        </strong>
+
+                        <span>
+                            Web Development
+                        </span>
+
+                    </div>
+
+                    <div class="profile-item">
+
+                        <strong>
+                            Automation
+                        </strong>
+
+                        <span>
+                            AI & Business Automation
+                        </span>
+
+                    </div>
+
+                    <div class="profile-item">
+
+                        <strong>
+                            Current Goal
+                        </strong>
+
+                        <span>
+                            Build useful solutions and work
+                            with businesses and startups.
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- SKILLS -->
+
+    <section class="skills-section">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>
+                    Technical Focus
+                </h2>
+
+                <p>
+                    Technologies and areas I'm currently working with.
+                </p>
+
+            </div>
+
+
+            <div class="skills">
+
+
+                <div class="skill">
+
+                    <h3>
+                        AWS
+                    </h3>
+
+                    <p>
+                        EC2, S3, RDS, CloudFront,
+                        Route 53, IAM and more.
+                    </p>
+
+                </div>
+
+
+                <div class="skill">
+
+                    <h3>
+                        DevOps
+                    </h3>
+
+                    <p>
+                        GitHub, deployment,
+                        automation and cloud infrastructure.
+                    </p>
+
+                </div>
+
+
+                <div class="skill">
+
+                    <h3>
+                        Web
+                    </h3>
+
+                    <p>
+                        HTML, CSS, JavaScript and
+                        responsive website development.
+                    </p>
+
+                </div>
+
+
+                <div class="skill">
+
+                    <h3>
+                        AI
+                    </h3>
+
+                    <p>
+                        AI-powered workflows,
+                        assistants and business automation.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- APPROACH -->
+
+    <section class="approach-section">
+
+        <div class="container">
+
+            <div class="section-title">
+
+                <h2>
+                    My Approach
+                </h2>
+
+                <p>
+                    How I approach technology projects.
+                </p>
+
+            </div>
+
+
+            <div class="approach">
+
+
+                <div class="approach-card">
+
+                    <h3>
+                        Practical
+                    </h3>
+
+                    <p>
+                        I focus on building solutions that
+                        solve actual problems and can be
+                        used in the real world.
+                    </p>
+
+                </div>
+
+
+                <div class="approach-card">
+
+                    <h3>
+                        Cloud First
+                    </h3>
+
+                    <p>
+                        I use cloud technologies to create
+                        solutions that are secure, accessible
+                        and easier to scale.
+                    </p>
+
+                </div>
+
+
+                <div class="approach-card">
+
+                    <h3>
+                        Continuous Learning
+                    </h3>
+
+                    <p>
+                        I continuously experiment with new
+                        technologies and improve my projects
+                        through hands-on practice.
+                    </p>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CTA -->
+
+    <section class="cta-section">
+
+        <div class="container">
+
+            <div class="cta">
+
+                <h2>
+                    Let's build something useful.
+                </h2>
+
+                <p>
+                    Have a website, cloud or automation
+                    idea? Let's discuss it.
+                </p>
+
+                <a href="contact.html"
+                   class="btn">
+                    Contact Me
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div class="container">
+
+            <p>
+                © 2026 Aarchi Web & Cloud.
+                All rights reserved.
+            </p>
+
+        </div>
+
+    </footer>
+
+
+</body>
+
+</html>
